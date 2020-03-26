@@ -1,0 +1,77 @@
+cost_code,name
+00 00 00,General Conditions
+00 00 01,Non-Reimbursable
+00 31 46,Permits
+00 60 00,Project Forms
+00 62 76,Sales Tax
+00 65 36,Warranty
+00 72 00,General Conditions
+00 72 01,Project Executive
+00 72 02,Sr. Project Manager
+00 72 03,Project Manager
+00 72 04,Assistant Project Manager
+00 72 05,Area Manager
+00 72 06,Sr. Superintendent
+00 72 07,Superintendent
+00 72 08,Assistant Superintendent
+00 72 09,Sr. Project Engineer
+00 72 10,Project Engineer II
+00 73 19,Health and Safety Requirements
+01 00 00,General Requirements
+01 00 01,Postage / UPS/FedEx
+01 00 02,Delivery Service/ Courier
+01 00 03,Temp Fencing
+01 00 04,Shed/Storage Facility
+01 00 05,Chemical Toilets
+01 00 06,Electrical Consumption/Temp Power
+01 00 07,Electrical Final
+01 00 08,Water Consumption/Temp Water
+01 00 09,Gas Consumption
+01 00 10,Sewer Charges
+01 66 00,Product Storage and Handling Requirements
+01 74 13,Rough And Daily Cleaning
+01 74 19,Dumpster And Dump Fees
+01 74 23,Final Cleaning
+01 78 33,Bonds
+02 00 00,Existing Conditions
+02 21 00,Surveys
+02 41 00,Interior Demolition
+02 50 00,Site Remediation
+02 55 00,Remediation Soil Stabilization
+03 00 00,Concrete
+03 30 00,Cast-in-Place Concrete
+03 30 30,Slab on Grade 
+03 30 31,Post Tension Slab on Grade
+03 30 32,Equipment Pad
+03 30 51,Walls
+03 30 52,Retaining Walls
+03 30 70,Columns
+03 30 71,Stairs
+03 30 72,Post Tension Decks
+03 30 73,Elevated Beams
+03 31 00,Foundations
+03 31 10,Continuous footings
+03 31 20,Retaining Footings
+03 31 30,Spread Footings
+03 31 40,Mat Footings
+03 31 50,Pile Caps
+03 31 60,Elevator Pit Walls
+03 31 70,Stem Walls
+03 31 80,Grade Beams
+03 40 00,Precast Concrete
+03 41 00,Precast Structural Concrete
+03 41 16,Precast Concrete Slab
+03 41 33,Precast Tees
+03 45 00,Precast Architectural Concrete
+03 48 19,Precast Stair Treads
+03 54 00,Cast Underlayment (Gypcrete)
+03 54 13,Poured Gypsum Underlayment
+03 54 14,Concrete Topping 
+04 00 00,Masonry
+04 20 00,Unit Masonry
+04 21 13,Brick and Mortar
+04 22 00,Concrete Unit Masonry
+04 40 00,Stone Assemblies
+04 42 00,Exterior Cladding - Veneer
+04 43 00,Stone Masonry
+04 57 00,Masonry Fireplaces
