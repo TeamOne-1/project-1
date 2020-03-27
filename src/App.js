@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Resource from "./components/Resource";
+import Resource from "./components/resource/Resource";
 import Project from "./components/Project";
 import Formula from "./components/Formula";
 import Login from "./components/forms/Login";
@@ -14,7 +14,7 @@ import HOC from "./components/forms/Hoc";
 function App() {
   let isLogin = JSON.parse(localStorage.getItem("token"));
   return (
-    <div className="App">
+    <div style={{ minHeight: "100%" }}>
       <Provider store={store}>
         <Router>
           <Route exact render={props => <NavBar {...props} />} />

@@ -9,6 +9,7 @@
   visibility: hidden;
   transition: all 0.25s ease-in;
   transform: translateX(-50%);
+  z-index: 10000;
 }
 .sidebar .link {
   color: #fff;
