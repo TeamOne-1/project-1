@@ -1,0 +1,39 @@
+.user-name {
+  width: 300px;
+  height: 200px;
+  background-color: #000;
+  position: absolute;
+  right: 100px;
+  top: 80px;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+  color: #fff;
+}
+.user-name::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  background-color: #000;
+  transform: rotate(45deg);
+}
+.div {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #eee;
+  height: 70px;
+}
+.user-details {
+  display: flex;
+  position: absolute;
+  top: -130%;
+  flex-direction: column;
+  left: 40%;
+  text-align: center;
+}

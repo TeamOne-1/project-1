@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./sidebar.css";
-import { Link, BrowserRouter as Router } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 const Sidebar = () => {
   const links = [
@@ -29,7 +30,7 @@ const Sidebar = () => {
       <div className={style}>
         <div className="router">
           <li className="empty-li">
-            {open ? (
+            {style === "sidebar" ? (
               <ExpandMoreIcon
                 style={{ transform: "rotate(-90deg)" }}
                 onClick={handleClick}
@@ -43,7 +44,12 @@ const Sidebar = () => {
           </li>
           {links.map(link => {
             return (
-              <Link className="link" to={link.url} onClick={handleClick}>
+              <Link
+                key={link.url}
+                className="link"
+                to={link.url}
+                onClick={handleClick}
+              >
                 {link.name}
               </Link>
             );
