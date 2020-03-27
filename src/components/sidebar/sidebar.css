@@ -6,7 +6,7 @@
   top: 100%;
   left: -10%;
   position: absolute;
-  visibility: visible;
+  visibility: hidden;
   transition: all 0.25s ease-in;
   transform: translateX(-50%);
 }
@@ -78,8 +78,7 @@
 }
 
 .active {
-  /* opacity: 1;
-  visibility: visible; */
+  visibility: visible;
   transition: all 0.25s ease-in;
   transform: translateX(0);
   left: 0;
@@ -91,7 +90,6 @@
   margin-right: 40px;
   cursor: pointer;
 }
-
 @-webkit-keyframes fadeInRight {
   0% {
     opacity: 0;
