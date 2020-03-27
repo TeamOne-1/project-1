@@ -5,6 +5,7 @@ import logo from "./img/user_img.png";
 import HelpIcon from "@material-ui/icons/Help";
 import Sidebar from "./sidebar/Sidebar";
 import ViewModuleIcon from "@material-ui/icons/ViewModule";
+
 import "./nav.css";
 let isAuth;
 let username;
@@ -20,6 +21,7 @@ export default function NavBar(props) {
   const Logout = () => {
     localStorage.removeItem("loginToken");
     props.history.push("/");
+    setShow(false);
   };
   return (
     <>
@@ -63,6 +65,7 @@ export default function NavBar(props) {
             </Navbar.Brand>
           </div>
         </div>
+        {isAuth ? <h3 style={{ marginLeft: "0px" }}>Project 1</h3> : null}
         <div>
           <div style={{ display: "flex" }}>
             <button
@@ -84,10 +87,10 @@ export default function NavBar(props) {
                 {" "}
                 <div className="div">
                   <div className="user-details">
-                    <h5 style={{ alignSelf: "center" }}>
+                    <h3 style={{ alignSelf: "center" }}>
                       {!isAuth ? "Not logedin" : username}
                       {console.log(username, "username")}
-                    </h5>
+                    </h3>
                     <p>
                       Member Since <br />
                       May-2019

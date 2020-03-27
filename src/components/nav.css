@@ -3,12 +3,15 @@
   height: 200px;
   background-color: #000;
   position: absolute;
-  right: 100px;
+  right: 80px;
   top: 80px;
   -webkit-box-shadow: 0 10px 6px -6px #777;
   -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: 0 10px 6px -6px #777;
   color: #fff;
+  z-index: 1000;
+  transition: all 0.5s;
+  text-align: center;
 }
 .user-name::before {
   content: "";
@@ -34,6 +37,6 @@
   position: absolute;
   top: -130%;
   flex-direction: column;
-  left: 40%;
+  left: 20%;
   text-align: center;
 }

@@ -3,14 +3,17 @@ import thunk from "redux-thunk";
 
 // import logger from 'redux-logger'
 import rootReducer from "../redux/reducer/rootReducer";
-
-// const logger = createLogger();
-
+import { composeWithDevTools } from "redux-devtools-extension";
+const composeEnhancers = composeWithDevTools({
+  // Specify here name, actionsBlacklist, actionsCreators and other options
+});
 const store = createStore(
   rootReducer,
-  applyMiddleware(
-    thunk
-    //  logger
+  composeEnhancers(
+    applyMiddleware(
+      thunk
+      //  logger
+    )
   )
 );
 

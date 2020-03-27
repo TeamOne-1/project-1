@@ -1,4 +1,5 @@
 import React from "react";
+import ResourceTable from "./ResourceTable";
 let isAuth;
 class Resource extends React.Component {
   componentDidMount() {
@@ -11,7 +12,11 @@ class Resource extends React.Component {
     }
   }
   render() {
-    return <div>hello</div>;
+    return (
+      <div>
+        <ResourceTable />
+      </div>
+    );
   }
 }
 export default Resource;
