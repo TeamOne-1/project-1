@@ -27,6 +27,7 @@ const SignUp = props => {
     confirmPassword,
     userExist
   } = props.user.errors;
+
   return (
     <div
       style={{
@@ -40,10 +41,9 @@ const SignUp = props => {
     >
       {props.error ? (
         <div className="alert alert-danger" role="alert">
-          {console.log(props.error, "kkkkk")}
+          {props.error}
         </div>
       ) : null}
-
       <h1
         style={{ color: "hsl(14, 90%, 61%)", fontWeight: "bold" }}
         className="h1 pb-5"
@@ -144,7 +144,7 @@ const SignUp = props => {
             />
           )}
         </Form.Group>
-        <span className="text-danger">{confirmPassword}</span>
+        <span className="error">{confirmPassword}</span>
         <Button
           style={{
             backgroundColor: "hsl(14, 90%, 61%)",

@@ -14,18 +14,14 @@ export const signup = authData => {
       url = "http://localhost:3000/src/component/signup";
     let userArr = JSON.parse(localStorage.getItem("token")) || [];
     console.log("userArr", userArr, signupData);
-    const errorFound = userArr.find(
-      user =>
-        user.email === signupData.email && user.userName === signupData.userName
-    );
+    const errorFound = userArr.find(user => user.email === signupData.email);
     if (errorFound) {
-      // alert("user name already exist");
-      fail("user name already exist");
+      dispatch(fail("user name already exist"));
     } else {
       userArr.push(signupData);
       localStorage.setItem("token", JSON.stringify(userArr));
       authData.history.push("/");
-      // success(userArr)
+      dispatch(success(userArr));
     }
   };
 };

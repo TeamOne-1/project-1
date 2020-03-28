@@ -20,10 +20,31 @@ function HOC(OriginalComponent) {
         show: false
       }
     };
+    onCancel = () => {
+      this.setState({
+        user: {
+          fullName: "",
+          userName: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          errors: {
+            fullName: "",
+            userName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            dontmath: "",
+            userExist: ""
+          }
+        }
+      });
+    };
+
     handleChange = e => {
       const { user } = this.state;
       const { name, value } = e.target;
-      let errors = this.state.user.errors;
+      let errors = this.state.user && this.state.user.errors;
       const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       switch (name) {
         case "fullName":
@@ -42,6 +63,9 @@ function HOC(OriginalComponent) {
           errors.password =
             value.length < 8 ? "Password must be 8 characters long!" : "";
           break;
+        case "confirmPassword":
+          errors.confirmPassword =
+            value.length < 8 ? "Password must be 8 characters long!" : "";
 
         default:
           break;
@@ -71,6 +95,7 @@ function HOC(OriginalComponent) {
           handleChange={this.handleChange}
           isEnabled={isEnabled}
           loginDis={loginDis}
+          onCancel={this.onCancel}
           {...this.props}
         />
       );

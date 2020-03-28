@@ -18,11 +18,11 @@ export const signIn = loginData => {
     if (userFound) {
       loginData.history.push("/resource");
       localStorage.setItem("loginToken", true);
-      success(loginData.user);
+      dispatch(success(loginData.user));
     } else {
       loginData.user.errors.password = "email and password don't match";
-      fail("email and password don't match");
-      alert("email and password don't match");
+      let errorMsg = "Invalid Credentials Please try Again";
+      dispatch(fail(errorMsg));
     }
   };
 };

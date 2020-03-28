@@ -19,10 +19,12 @@ const Login = props => {
   const onSubmit = e => {
     e.preventDefault();
     props.signIn(props);
+    console.log(props);
   };
   const goToSignup = () => {
     history.push("/signup");
   };
+
   return (
     <div>
       <div
@@ -46,7 +48,6 @@ const Login = props => {
         >
           Login
         </h1>
-        {/* <h6 className="text-muted">Building Product Selection platform</h6> */}
         <Form onSubmit={onSubmit} style={{ marginTop: "50px" }} noValidate>
           <Form.Group style={{ position: "relative" }}>
             <Form.Label className="float-left font-weight-bold">
@@ -59,9 +60,9 @@ const Login = props => {
               type="email"
               placeholder="Enter email"
               required
-              className={props.user.errors.email ? "is-invalid" : ""}
+              // className={props.user.email ? "is-invalid" : ""}
             />
-            <span className="text-danger">{props.user.errors.email}</span>
+            {/* <span className="text-danger">{props.user.email}</span> */}
           </Form.Group>
 
           <Form.Group style={{ position: "relative" }}>
@@ -70,7 +71,7 @@ const Login = props => {
             </Form.Label>
             <Form.Control
               name="password"
-              value={props.password}
+              value={props.user.password}
               onChange={props.handleChange}
               //   type="password"
               type={showpass ? "password" : "text"}
@@ -110,23 +111,37 @@ const Login = props => {
             <Form.Check type="checkbox" label="Remember me" />
           </Form.Group>
         </Form>
-        <button
-          onClick={goToSignup}
-          style={{
-            position: "absolute",
-            top: "100%",
-            left: "0%"
-          }}
-          className="btn btn-color text-white"
-        >
-          Sign up
-        </button>
+        {!props.loginDis ? (
+          <button
+            onClick={goToSignup}
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: "0%"
+            }}
+            className="btn btn-color text-white"
+          >
+            Sign up
+          </button>
+        ) : (
+          <button
+            onClick={props.onCancel}
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: "0%"
+            }}
+            className="btn btn-color text-white"
+          >
+            cancel
+          </button>
+        )}
       </div>
     </div>
   );
 };
 const mapStateToProps = state => {
-  console.log("state", state);
+  // console.log("state", state);
   return {
     error: state.signIn.error,
     signIn: state.signIn,
