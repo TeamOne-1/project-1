@@ -1,9 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar } from "react-bootstrap";
-import logo from "./img/user_img.png";
+import logo from "../img/user_img.png";
 import HelpIcon from "@material-ui/icons/Help";
-import Sidebar from "./sidebar/Sidebar";
+import Sidebar from "../sidebar/Sidebar";
 import ViewModuleIcon from "@material-ui/icons/ViewModule";
 
 import "./nav.css";
@@ -65,7 +65,7 @@ export default function NavBar(props) {
             </Navbar.Brand>
           </div>
         </div>
-        {isAuth ? <h3 style={{ marginLeft: "0px" }}>Project 1</h3> : null}
+        {isAuth ? <h3 style={{ marginLeft: "150px" }}>Project 1</h3> : null}
         <div>
           <div style={{ display: "flex" }}>
             <button
@@ -88,10 +88,9 @@ export default function NavBar(props) {
                 <div className="div">
                   <div className="user-details">
                     <h3 style={{ alignSelf: "center" }}>
-                      {!isAuth ? "Not logedin" : username}
-                      {console.log(username, "username")}
+                      <h3>{username}</h3>
                     </h3>
-                    <p>
+                    <p style={{ marginTop: "-20px" }}>
                       Member Since <br />
                       May-2019
                     </p>
@@ -107,7 +106,18 @@ export default function NavBar(props) {
             ) : null}
 
             <span style={{ alignSelf: "center" }}>
-              {!isAuth ? "Not logedin" : username}
+              {!isAuth ? (
+                <h5 style={{ width: 170, textAlign: "center" }}>Not LogedIn</h5>
+              ) : (
+                <h5
+                  style={{
+                    width: 170,
+                    textAlign: "center"
+                  }}
+                >
+                  {username}
+                </h5>
+              )}
               {console.log(username, "username")}
             </span>
 

@@ -18,7 +18,12 @@
   padding: 10px;
   text-align: left;
   padding-left: 70px;
+  transition: underline 0.3s;
 }
+.sidebar .link:hover {
+  text-decoration: underline;
+}
+
 .sidebar .router {
   padding: 1px 0;
   margin: 0;

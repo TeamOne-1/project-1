@@ -1,15 +1,9 @@
 import React from "react";
 import ResourceTable from "./ResourceTable";
-let isAuth;
+import ResHoc from "../IsAuthHoc";
 class Resource extends React.Component {
   componentDidMount() {
-    isAuth = localStorage.getItem("loginToken");
-    if (isAuth) {
-      console.log("Authenticated");
-    } else {
-      this.props.history.push("/");
-      alert("Please Login to access this page");
-    }
+    this.props.handleAuth();
   }
   render() {
     return (
@@ -19,4 +13,4 @@ class Resource extends React.Component {
     );
   }
 }
-export default Resource;
+export default ResHoc(Resource);

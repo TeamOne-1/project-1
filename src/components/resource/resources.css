@@ -18,3 +18,15 @@
   background-color: hsl(14, 90%, 50%);
   color: #fff;
 }
+.input-cell {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+.input-cell:focus {
+  outline: 1px solid #999;
+  background-color: #fff;
+}
+.MuiTypography-h6 {
+  display: none;
+}

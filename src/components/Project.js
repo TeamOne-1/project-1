@@ -1,14 +1,8 @@
 import React from "react";
-let isAuth;
+import ResHoc from "./IsAuthHoc";
 class Project extends React.Component {
   componentDidMount() {
-    isAuth = localStorage.getItem("loginToken");
-    if (isAuth) {
-      console.log("Authenticated");
-    } else {
-      this.props.history.push("/");
-      alert("Please Login to access this page");
-    }
+    this.props.handleAuth();
   }
   render() {
     return (
@@ -18,4 +12,4 @@ class Project extends React.Component {
     );
   }
 }
-export default Project;
+export default ResHoc(Project);

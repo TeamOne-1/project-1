@@ -10,6 +10,8 @@
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.4.1",
     "d3": "^5.15.0",
+    "material-table": "^1.57.2",
+    "papaparse": "^5.1.1",
     "react": "^16.13.1",
     "react-animated-css": "^1.2.1",
     "react-bootstrap": "^1.0.0",
