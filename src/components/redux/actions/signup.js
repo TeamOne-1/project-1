@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-
+import axios from "axios";
 export const signup = authData => {
   console.log("authData", authData);
   return dispatch => {
@@ -11,8 +11,11 @@ export const signup = authData => {
         password: authData.user.password,
         confirmPassword: authData.user.confirmPassword
       },
-      url = "http://localhost:3000/src/component/signup";
+      url = "http://localhost:8080/KoreraProject3/";
+
     let userArr = JSON.parse(localStorage.getItem("token")) || [];
+    //  let userArr = JSON.parse(url)
+
     console.log("userArr", userArr, signupData);
     const errorFound = userArr.find(user => user.email === signupData.email);
     if (errorFound) {
@@ -21,6 +24,7 @@ export const signup = authData => {
       userArr.push(signupData);
       localStorage.setItem("token", JSON.stringify(userArr));
       authData.history.push("/");
+      axios.post(url, { signupData });
       dispatch(success(userArr));
     }
   };

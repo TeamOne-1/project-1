@@ -1,7 +1,5 @@
 import React from "react";
 import ResHoc from "./IsAuthHoc";
-
-
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,18 +9,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Dropdown, Button } from "react-bootstrap";
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
-import ReplyIcon from '@material-ui/icons/Reply';
-import "./project.css";
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
+import ReplyIcon from "@material-ui/icons/Reply";
+import "./resource/resources.css";
 import { csv } from "d3";
-import data from "./data.csv";
+import data from "./resource/data.csv";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Checkbox from "@material-ui/core/Checkbox";
 
-
-
-
-
-import DeleteIcon from '@material-ui/icons/Delete';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 function createData(cost_code, name) {
   return { cost_code, name };
 }
@@ -38,28 +32,12 @@ class ResourceTable extends React.Component {
     rowsPerPage: 10,
     searchString: "",
     open: false,
-    isInput: false
+    isInput: false,
+    row1: true,
+    checked: false,
+    newrow: []
   };
 
-  componentDidMount() {
-    this.props.handleAuth();
-  }
-  render() {
-    return (
-      <div style={{ color: "#000" }}>
-        <h1>Project</h1>
-      </div>
-    );
-  }
-
-  addCol = () => {
-    this.setState({
-      columns: [
-        ...this.state.columns,
-        { id: Date.now(), label: <input type="text" />, minWidth: 170 }
-      ]
-    });
-  };
   handleInput = () => {
     this.setState({
       isInput: true
@@ -72,29 +50,26 @@ class ResourceTable extends React.Component {
       });
     }
   };
-  addRow = () => {
+  onChecked = () => {
     this.setState({
-      row: this.state.rows.push(
-        createData(
-          <div>
-            <input type="text" className="hoverme" onKeyPress={this.onClick} />
-
-            {/* <button className="hoverbtn">+</button>
-            <TableCell>
-              <input type="text" className="hoverme" />
-            </TableCell> */}
-          </div>,
-          <input type="text" />
-        )
-      )
+      checked: true
     });
   };
+
   componentDidMount = () => {
+    this.props.handleAuth();
     csv(data).then(data => {
       let rows = this.state.rows;
-
       data.map(data => {
-        rows.push(createData(data.cost_code, data.name));
+        return rows.push(
+          createData(
+            <div>
+              <Checkbox value={this.state.checked} onClick={this.onChecked} />
+              {data.name}
+            </div>,
+            data.cost_code
+          )
+        );
       });
       this.setState({ rows });
     });
@@ -119,17 +94,16 @@ class ResourceTable extends React.Component {
   handleChange = e => {
     this.setState({ searchString: e.target.value });
   };
+
   render() {
     let filterList = this.state.rows,
       searchString = this.state.searchString.trim().toLowerCase();
     if (searchString.length > 0) {
-      filterList = filterList.filter(function (filter) {
+      filterList = filterList.filter(function(filter) {
         return filter.name.toLowerCase().match(searchString);
       });
     }
     return (
-
-
       // seperate
 
       <Paper style={{ margin: "50px auto", width: "90%" }}>
@@ -137,22 +111,16 @@ class ResourceTable extends React.Component {
           <Dropdown className="project">
             <Dropdown.Toggle className="dropdown">Project 1 </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={this.project2}>Project 2
-            {/* <FormatAlignLeftIcon className="mr-4" /> Project 2 */}
-              </Dropdown.Item>
-              <Dropdown.Item onClick={this.project3}>Project 3
-            {/* <ImportContactsIcon className="mr-4" /> Project 3 */}
-              </Dropdown.Item>
-              <Dropdown.Item onClick={this.project4}>Project 4
-          </Dropdown.Item>
+              <Dropdown.Item onClick={this.project2}>Project 2</Dropdown.Item>
+              <Dropdown.Item onClick={this.project3}>Project 3</Dropdown.Item>
+              <Dropdown.Item onClick={this.project4}>Project 4</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>
 
-        <div style={{ display: "inline-block", width: "49%", border: "solid 1px" }}>
-
-
-
+        <div
+          style={{ display: "inline-block", width: "49%", border: "solid 1px" }}
+        >
           <div
             style={{
               width: "100%",
@@ -163,10 +131,6 @@ class ResourceTable extends React.Component {
               alignItems: "center"
             }}
           >
-
-
-
-
             <h6>Resource Catalog</h6>
             <div style={{ float: "right" }}>
               <Dropdown style={{ align: "right" }}>
@@ -174,15 +138,14 @@ class ResourceTable extends React.Component {
                   <FormatListBulletedIcon className="mr-4" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item onClick={this.addRow}> Select All
-              </Dropdown.Item>
-                  <Dropdown.Item onClick={this.addCol}>Clear selection
-              </Dropdown.Item>
+                  <Dropdown.Item onClick={this.onChecked}>
+                    Select All
+                  </Dropdown.Item>
+                  <Dropdown.Item>Clear selection</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
 
               <ReplyIcon className="add-btn" />
-
             </div>
           </div>
 
@@ -206,7 +169,7 @@ class ResourceTable extends React.Component {
                   .slice(
                     this.state.page * this.state.rowsPerPage,
                     this.state.page * this.state.rowsPerPage +
-                    this.state.rowsPerPage
+                      this.state.rowsPerPage
                   )
                   .map(row => {
                     return (
@@ -219,11 +182,13 @@ class ResourceTable extends React.Component {
                         {this.state.columns.map(column => {
                           const value = row[column.id];
                           return (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
+                            <>
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === "number"
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            </>
                           );
                         })}
                       </TableRow>
@@ -243,10 +208,11 @@ class ResourceTable extends React.Component {
           />
         </div>
 
-
         <div style={{ display: "inline-block", width: "2%" }}></div>
 
-        <div style={{ display: "inline-block", width: "49%", border: "solid 1px" }}>
+        <div
+          style={{ display: "inline-block", width: "49%", border: "solid 1px" }}
+        >
           <div
             style={{
               width: "100%",
@@ -257,17 +223,9 @@ class ResourceTable extends React.Component {
               alignItems: "center"
             }}
           >
-
-
             <h6 style={{}}>project</h6>
 
             <DeleteIcon />
-
-
-
-
-
-
           </div>
 
           <TableContainer style={{ height: "70vh" }}>
@@ -285,9 +243,7 @@ class ResourceTable extends React.Component {
                   ))}
                 </TableRow>
               </TableHead>
-              <TableBody>
-
-              </TableBody>
+              <TableBody></TableBody>
             </Table>
           </TableContainer>
           <TablePagination
@@ -298,8 +254,10 @@ class ResourceTable extends React.Component {
             page={this.state.page}
             onChangePage={this.handleChangePage}
             onChangeRowsPerPage={this.handleChangeRowsPerPage}
-          /></div>
-        <a href="/template">Edit format</a><Button
+          />
+        </div>
+        <a href="/template">Edit format</a>
+        <Button
           style={{
             width: "80px",
             backgroundColor: "hsl(14, 90%, 61%)",
@@ -310,7 +268,7 @@ class ResourceTable extends React.Component {
           type="submit"
         >
           Submit
-          </Button>
+        </Button>
       </Paper>
     );
   }

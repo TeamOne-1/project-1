@@ -18,7 +18,7 @@
   padding: 10px;
   text-align: left;
   padding-left: 70px;
-  transition: underline 0.3s;
+  text-decoration: tex 0.3s;
 }
 .sidebar .link:hover {
   text-decoration: underline;
@@ -95,14 +95,4 @@
   height: 40px;
   margin-right: 40px;
   cursor: pointer;
-}
-@-webkit-keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    left: 20%;
-  }
-  100% {
-    opacity: 1;
-    left: 0;
-  }
 }
