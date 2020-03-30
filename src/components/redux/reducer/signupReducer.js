@@ -37,15 +37,15 @@ const fail = (state, action) => {
   };
 };
 
-const logout = (state, action) => {
-  return {
-    ...state,
-    loading: false,
-    success: false,
-    authorized: false,
-    token: null
-  };
-};
+// const logout = (state, action) => {
+//   return {
+//     ...state,
+//     loading: false,
+//     success: false,
+//     authorized: false,
+//     token: null
+//   };
+// };
 
 const SignupReducer = (state = initial, action) => {
   switch (action.type) {

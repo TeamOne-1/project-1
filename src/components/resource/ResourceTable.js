@@ -7,7 +7,6 @@ import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import { Modal, Button } from "react-bootstrap";
 import SearchIcon from "@material-ui/icons/Search";
-import FormatAlignLeftIcon from "@material-ui/icons/FormatAlignLeft";
 import Papa from "papaparse";
 import "./resources.css";
 
@@ -22,9 +21,33 @@ class Table extends Component {
       tableData: [],
       selectedRow: null,
       showAddModal: false,
-      showFileModal: false
+      showFileModal: false,
+      showconfiromMassege: false,
+      newColumn: "",
+      columnsData: [
+        {
+          title: "Name",
+          field: "name",
+          editComponent: props => (
+            <input
+              type="text"
+              value={props.value}
+              required
+              onChange={e => props.onChange(e.target.value)}
+            />
+          )
+        },
+        { title: "Cost Code", field: "cost_code" }
+      ]
     };
   }
+
+  handelShowOpne = () => {
+    this.setState({ showconfiromMassege: true });
+  };
+  handelShowclose = () => {
+    this.setState({ showconfiromMassege: false });
+  };
   handleAddModalClose = () => {
     this.setState({ showAddModal: false });
   };
@@ -53,7 +76,19 @@ class Table extends Component {
     csv(data).then(data => {
       let tableData = this.state.tableData;
       data.map(data => {
-        tableData.push(createData(data.cost_code, data.name));
+        console.log("data", data);
+        // this.state.columns.map((col, i) =>{
+        //   if(col.field == "cost_code" ){
+        //     console.log("col.field == 'cost_code' ", col.field == "cost_code" )
+        //     tableData.push(createData(data.cost_code,  data.name));
+        //     console.log("tableData", tableData)
+        //   };
+        //   // if(col.field == "name"){
+        //   //   tableData.push(createData( data.name));
+        //   // }
+        // })
+        return tableData.push(createData(data.cost_code, data.name));
+        // console.log("tableData", tableData);
       });
       this.setState({ tableData });
     });
@@ -63,25 +98,60 @@ class Table extends Component {
     this.csvFileRead();
   }
 
+  handleAddColumn = e => {
+    e.preventDefault();
+    console.log("new ol", this.state);
+    let field = this.state.newColumn
+      .toLowerCase()
+      .split(" ")
+      .join("_");
+    this.state.columnsData.push({ title: this.state.newColumn, field: field });
+    this.handleAddModalClose();
+  };
+  updateInputValue = e => {
+    e.preventDefault();
+    console.log(e);
+    this.setState({
+      newColumn: e.target.value
+    });
+  };
+  renderColumns = column => {
+    return (
+      column &&
+      column.map((col, i) => {
+        return col;
+      })
+    );
+  };
+
+  handleInputForColumn = event => {
+    event.preventDefault();
+    this.setState({ newColumn: event.target.value });
+  };
+
   render() {
+    const { columnsData } = this.state;
     return (
       <div style={{ maxWidth: "100%", margin: "50px" }}>
         <MaterialTable
-          columns={[
-            {
-              title: "Name",
-              field: "name",
-              editComponent: props => (
-                <input
-                  type="text"
-                  value={props.value}
-                  required
-                  onChange={e => props.onChange(e.target.value)}
-                />
-              )
-            },
-            { title: "Cost Code", field: "cost_code" }
-          ]}
+          columns={
+            // {
+            //   title: "Name",
+            //   field: "name",
+            //   editComponent: props => (
+            //     <input
+            //       type="text"
+            //       value={props.value}
+            //       required
+            //       onChange={e => props.onChange(e.target.value)}
+            //     />
+            //   )
+            // },
+            columnsData &&
+            columnsData.map((col, i) => {
+              return col;
+            })
+          }
           data={this.state.tableData}
           onRowClick={(evt, selectedRow) => this.setState({ selectedRow })}
           options={{
@@ -184,6 +254,37 @@ class Table extends Component {
                 </div>
                 <MTableToolbar {...props} />
 
+                <Modal />
+                <Modal
+                  show={this.state.showconfiromMassege}
+                  onHide={this.handelShowclose}
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title>Adding New File</Modal.Title>
+                  </Modal.Header>
+                  <form onSubmit={this.addCol}>
+                    <Modal.Body>
+                      <p>Are Your Sure you want to override these data?</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button
+                        variant="secondary"
+                        onClick={this.handelShowclose}
+                        className="add-btn"
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        className="add-btn"
+                        onClick={this.csvFileRead}
+                      >
+                        Import
+                      </Button>
+                    </Modal.Footer>
+                  </form>
+                </Modal>
                 <Modal
                   show={this.state.showAddModal}
                   onHide={this.handleAddModalClose}
@@ -195,20 +296,27 @@ class Table extends Component {
                     <Modal.Body>
                       <h6>Column Name</h6>
                       <input
-                        value={this.state.newCol}
+                        className="form-control my-0 py-1 amber-border"
                         type="text"
                         required
-                        onChange={this.handleAddColumn}
+                        value={this.state.newColumn}
+                        onChange={this.handleInputForColumn}
                       />
                     </Modal.Body>
                     <Modal.Footer>
                       <Button
                         variant="secondary"
                         onClick={this.handleAddModalClose}
+                        className="add-btn"
                       >
                         Close
                       </Button>
-                      <Button variant="primary" type="submit">
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        className="add-btn"
+                        onClick={e => this.handleAddColumn(e)}
+                      >
                         Save Changes
                       </Button>
                     </Modal.Footer>
@@ -234,11 +342,17 @@ class Table extends Component {
                       <Button
                         variant="secondary"
                         onClick={this.handleFileModalClose}
+                        className="add-btn"
                       >
                         Close
                       </Button>
-                      <Button variant="primary" type="submit">
-                        Upload
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        onClick={this.handelShowOpne}
+                        className="add-btn"
+                      >
+                        Import
                       </Button>
                     </Modal.Footer>
                   </form>

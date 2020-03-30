@@ -12,7 +12,7 @@ import Signup from "./components/forms/Signup";
 import HOC from "./components/forms/Hoc";
 
 function App() {
-  let isLogin = JSON.parse(localStorage.getItem("token"));
+  // let isLogin = JSON.parse(localStorage.getItem("token"));
   return (
     <div style={{ minHeight: "100%" }}>
       <Provider store={store}>

@@ -66,7 +66,7 @@ function HOC(OriginalComponent) {
         case "confirmPassword":
           errors.confirmPassword =
             value.length < 8 ? "Password must be 8 characters long!" : "";
-
+          break;
         default:
           break;
       }

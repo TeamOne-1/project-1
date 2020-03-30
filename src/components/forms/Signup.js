@@ -24,8 +24,7 @@ const SignUp = props => {
     fullName,
     email,
     password,
-    confirmPassword,
-    userExist
+    confirmPassword
   } = props.user.errors;
 
   return (
