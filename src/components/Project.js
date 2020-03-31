@@ -16,14 +16,13 @@ import { csv } from "d3";
 import data from "./resource/data.csv";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Checkbox from "@material-ui/core/Checkbox";
-
-function createData(cost_code, name) {
-  return { cost_code, name };
+function createData(checkbox, cost_code, name) {
+  return { checkbox, cost_code, name };
 }
-
 class ResourceTable extends React.Component {
   state = {
     columns: [
+      { id: "checkbox", label: "Check", minWidth: 170 },
       { id: "cost_code", label: "Cost Code", minWidth: 170 },
       { id: "name", label: "Name", minWidth: 100 }
     ],
@@ -34,26 +33,51 @@ class ResourceTable extends React.Component {
     open: false,
     isInput: false,
     row1: true,
-    checked: false,
-    newrow: []
+    checked: true,
+    newrow: [],
+    trueRows: []
   };
-
   handleInput = () => {
     this.setState({
       isInput: true
     });
   };
-  onClick = e => {
-    if (e.key === "Enter") {
-      this.setState({
-        isInput: false
-      });
-    }
-  };
-  onChecked = () => {
-    this.setState({
-      checked: true
+  onChecked = id => {
+    let newrows = [];
+    this.state.rows.map(row => {
+      if (row.cost_code == id) {
+        row.checkbox === false ? (row.checkbox = true) : (row.checkbox = false);
+        newrows.push(row);
+      } else {
+        newrows.push(row);
+      }
     });
+    this.setState({ rows: newrows });
+  };
+
+  filterTrueRows = () => {
+    let trueRows = [];
+    this.state.rows.map(row => {
+      row.checkbox === true && trueRows.push(row);
+    });
+    this.setState({ trueRows: trueRows });
+  };
+
+  selectAll = () => {
+    let newrows = [];
+    this.state.rows.map(row => {
+      row.checkbox = true;
+      newrows.push(row);
+    });
+    this.setState({ rows: newrows });
+  };
+  unSelect = () => {
+    let newrows = [];
+    this.state.rows.map(row => {
+      row.checkbox = false;
+      newrows.push(row);
+    });
+    this.setState({ rows: newrows });
   };
 
   componentDidMount = () => {
@@ -61,15 +85,7 @@ class ResourceTable extends React.Component {
     csv(data).then(data => {
       let rows = this.state.rows;
       data.map(data => {
-        return rows.push(
-          createData(
-            <div>
-              <Checkbox value={this.state.checked} onClick={this.onChecked} />
-              {data.name}
-            </div>,
-            data.cost_code
-          )
-        );
+        return rows.push(createData(false, data.cost_code, data.name));
       });
       this.setState({ rows });
     });
@@ -97,6 +113,7 @@ class ResourceTable extends React.Component {
 
   render() {
     let filterList = this.state.rows,
+      trueFilterList = this.state.trueRows,
       searchString = this.state.searchString.trim().toLowerCase();
     if (searchString.length > 0) {
       filterList = filterList.filter(function(filter) {
@@ -105,9 +122,8 @@ class ResourceTable extends React.Component {
     }
     return (
       // seperate
-
-      <Paper style={{ margin: "50px auto", width: "90%" }}>
-        <div align="right">
+      <React.Fragment>
+        <div align="right" style={{ marginTop: "20px", marginRight: "80px" }}>
           <Dropdown className="project">
             <Dropdown.Toggle className="dropdown">Project 1 </Dropdown.Toggle>
             <Dropdown.Menu>
@@ -117,159 +133,245 @@ class ResourceTable extends React.Component {
             </Dropdown.Menu>
           </Dropdown>
         </div>
-
-        <div
-          style={{ display: "inline-block", width: "49%", border: "solid 1px" }}
-        >
+        <Paper style={{ margin: "50px auto", width: "90%" }}>
           <div
             style={{
-              width: "100%",
-              backgroundColor: "#999",
-              padding: "5px 10px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center"
+              display: "inline-block",
+              width: "49%",
+              border: "solid 1px"
             }}
           >
-            <h6>Resource Catalog</h6>
-            <div style={{ float: "right" }}>
-              <Dropdown style={{ align: "right" }}>
-                <Dropdown.Toggle className="add-btn">
-                  <FormatListBulletedIcon className="mr-4" />
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={this.onChecked}>
-                    Select All
-                  </Dropdown.Item>
-                  <Dropdown.Item>Clear selection</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+            <div
+              style={{
+                width: "100%",
+                backgroundColor: "#999",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "3px"
+              }}
+            >
+              <h6 style={{ paddingLeft: "5px" }}>Resource Catalog</h6>
+              <div
+                style={{
+                  float: "right",
+                  display: "flex",
+                  alignItems: "center"
+                }}
+              >
+                <Dropdown style={{ align: "right" }}>
+                  <Dropdown.Toggle className="add-btn">
+                    <FormatListBulletedIcon className="mr-4" />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={this.selectAll}>
+                      Select All
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={this.unSelect}>
+                      Clear selection
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
 
-              <ReplyIcon className="add-btn" />
+                <ReplyIcon
+                  className="add-btn"
+                  onClick={this.filterTrueRows}
+                  style={{
+                    marginLeft: "10px",
+                    transform: "rotate(180deg)"
+                  }}
+                />
+              </div>
             </div>
+
+            <TableContainer style={{ height: "70vh" }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {this.state.columns.map(column => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filterList
+                    .slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )
+                    .map(row => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.cost_code}
+                        >
+                          {this.state.columns.map(column => {
+                            const value = row[column.id];
+                            return (
+                              <>
+                                <TableCell key={column.id} align={column.align}>
+                                  {typeof value === "boolean" ? (
+                                    <Checkbox
+                                      checked={value}
+                                      onClick={() =>
+                                        this.onChecked(row.cost_code)
+                                      }
+                                    />
+                                  ) : column.format &&
+                                    typeof value === "number" ? (
+                                    column.format(value)
+                                  ) : (
+                                    value
+                                  )}
+                                </TableCell>
+                              </>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={this.state.rows.length}
+              rowsPerPage={this.state.rowsPerPage}
+              page={this.state.page}
+              onChangePage={this.handleChangePage}
+              onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            />
           </div>
 
-          <TableContainer style={{ height: "70vh" }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {this.state.columns.map(column => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {filterList
-                  .slice(
-                    this.state.page * this.state.rowsPerPage,
-                    this.state.page * this.state.rowsPerPage +
-                      this.state.rowsPerPage
-                  )
-                  .map(row => {
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.code}
-                      >
-                        {this.state.columns.map(column => {
-                          const value = row[column.id];
-                          return (
-                            <>
-                              <TableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === "number"
-                                  ? column.format(value)
-                                  : value}
-                              </TableCell>
-                            </>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={this.state.rows.length}
-            rowsPerPage={this.state.rowsPerPage}
-            page={this.state.page}
-            onChangePage={this.handleChangePage}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-          />
-        </div>
+          <div style={{ display: "inline-block", width: "2%" }}></div>
 
-        <div style={{ display: "inline-block", width: "2%" }}></div>
-
-        <div
-          style={{ display: "inline-block", width: "49%", border: "solid 1px" }}
-        >
           <div
             style={{
-              width: "100%",
-              backgroundColor: "#999",
-              padding: "5px 10px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center"
+              display: "inline-block",
+              width: "49%",
+              border: "solid 1px"
             }}
           >
-            <h6 style={{}}>project</h6>
+            <div
+              style={{
+                width: "100%",
+                backgroundColor: "#999",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "10px"
+              }}
+            >
+              <h6>project</h6>
 
-            <DeleteIcon />
+              <DeleteIcon onClick={this.deleSelected} />
+            </div>
+
+            <TableContainer style={{ height: "70vh" }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {this.state.columns.map(column => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        style={{ minWidth: column.minWidth }}
+                      >
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {trueFilterList
+                    .slice(
+                      this.state.page * this.state.rowsPerPage,
+                      this.state.page * this.state.rowsPerPage +
+                        this.state.rowsPerPage
+                    )
+                    .map(row => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.cost_code}
+                        >
+                          {this.state.columns.map(column => {
+                            const value = row[column.id];
+                            return (
+                              <>
+                                <TableCell key={column.id} align={column.align}>
+                                  {typeof value === "boolean" ? (
+                                    <Checkbox
+                                      checked={this.state.isSelected}
+                                      onChange={this.handleIsSelected}
+                                    />
+                                  ) : column.format &&
+                                    typeof value === "number" ? (
+                                    column.format(value)
+                                  ) : (
+                                    value
+                                  )}
+                                </TableCell>
+                              </>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={this.state.rows.length}
+              rowsPerPage={this.state.rowsPerPage}
+              page={this.state.page}
+              onChangePage={this.handleChangePage}
+              onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            />
           </div>
-
-          <TableContainer style={{ height: "70vh" }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {this.state.columns.map(column => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody></TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={this.state.rows.length}
-            rowsPerPage={this.state.rowsPerPage}
-            page={this.state.page}
-            onChangePage={this.handleChangePage}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-          />
-        </div>
-        <a href="/template">Edit format</a>
-        <Button
+        </Paper>
+        <div
           style={{
-            width: "80px",
-            backgroundColor: "hsl(14, 90%, 61%)",
-            border: "1px solid hsl(14, 90%, 61%)",
-            float: "right"
+            width: "80%",
+            display: "flex",
+            justifyContent: "space-between",
+            margin: "-20px auto"
           }}
-          className="btn btn-block text-white btn-color"
-          type="submit"
         >
-          Submit
-        </Button>
-      </Paper>
+          <a
+            href="/resource
+          "
+          >
+            Edit format
+          </a>
+          <Button
+            style={{
+              width: "80px",
+              backgroundColor: "hsl(14, 90%, 61%)",
+              border: "1px solid hsl(14, 90%, 61%)",
+              float: "right"
+            }}
+            className="btn btn-block text-white btn-color"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </div>
+      </React.Fragment>
     );
   }
 }

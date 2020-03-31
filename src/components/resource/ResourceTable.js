@@ -9,6 +9,7 @@ import { Modal, Button } from "react-bootstrap";
 import SearchIcon from "@material-ui/icons/Search";
 import Papa from "papaparse";
 import "./resources.css";
+import CSVReader from "react-csv-reader";
 
 const createData = (cost_code, name) => {
   return { cost_code, name };
@@ -24,6 +25,9 @@ class Table extends Component {
       showFileModal: false,
       showconfiromMassege: false,
       newColumn: "",
+      csv: null,
+      csvData: null,
+      importData: [],
       columnsData: [
         {
           title: "Name",
@@ -77,16 +81,7 @@ class Table extends Component {
       let tableData = this.state.tableData;
       data.map(data => {
         console.log("data", data);
-        // this.state.columns.map((col, i) =>{
-        //   if(col.field == "cost_code" ){
-        //     console.log("col.field == 'cost_code' ", col.field == "cost_code" )
-        //     tableData.push(createData(data.cost_code,  data.name));
-        //     console.log("tableData", tableData)
-        //   };
-        //   // if(col.field == "name"){
-        //   //   tableData.push(createData( data.name));
-        //   // }
-        // })
+
         return tableData.push(createData(data.cost_code, data.name));
         // console.log("tableData", tableData);
       });
@@ -124,6 +119,19 @@ class Table extends Component {
     );
   };
 
+  readFile = event => {
+    console.log(event.target);
+    this.setState({
+      csv: event.target.files[0]
+    });
+    console.log("handleFile", this.state.csv);
+  };
+
+  importCsv = (data, fileInfo) => {
+    console.log("importCsv", data, fileInfo);
+    this.setState({ importData: data });
+  };
+
   handleInputForColumn = event => {
     event.preventDefault();
     this.setState({ newColumn: event.target.value });
@@ -135,18 +143,6 @@ class Table extends Component {
       <div style={{ maxWidth: "100%", margin: "50px" }}>
         <MaterialTable
           columns={
-            // {
-            //   title: "Name",
-            //   field: "name",
-            //   editComponent: props => (
-            //     <input
-            //       type="text"
-            //       value={props.value}
-            //       required
-            //       onChange={e => props.onChange(e.target.value)}
-            //     />
-            //   )
-            // },
             columnsData &&
             columnsData.map((col, i) => {
               return col;
@@ -246,7 +242,6 @@ class Table extends Component {
                         <ImportContactsIcon className="mr-4" /> Add Column
                       </Dropdown.Item>
                       <Dropdown.Item onClick={this.handleFileModalShow}>
-                        <InsertDriveFileIcon className="mr-4 text-dark" />
                         Import CSV
                       </Dropdown.Item>
                     </Dropdown.Menu>
@@ -331,11 +326,10 @@ class Table extends Component {
                   </Modal.Header>
                   <form>
                     <Modal.Body>
-                      <input
-                        type="file"
-                        multiple
-                        onChange={e => this.handleFileChange(e)}
-                        required
+                      <CSVReader
+                        onFileLoaded={(data, fileInfo) =>
+                          this.importCsv(data, fileInfo)
+                        }
                       />
                     </Modal.Body>
                     <Modal.Footer>
@@ -349,7 +343,7 @@ class Table extends Component {
                       <Button
                         variant="primary"
                         type="submit"
-                        onClick={this.handelShowOpne}
+                        onClick={this.handleFileModalClose}
                         className="add-btn"
                       >
                         Import
