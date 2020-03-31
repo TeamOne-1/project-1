@@ -3,7 +3,6 @@ import { csv } from "d3";
 import data from "./data.csv";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { Dropdown } from "react-bootstrap";
-import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
 import { Modal, Button } from "react-bootstrap";
 import SearchIcon from "@material-ui/icons/Search";
