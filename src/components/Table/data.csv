@@ -1,0 +1,77 @@
+cost_code,name,EDITABLE,ITEM_ID
+00 00 00,General Conditions,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 00 01,Non-Reimbursable,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 31 46,Permits,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 60 00,Project Forms,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 62 76,Sales Tax,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 65 36,Warranty,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 00,General Conditions,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 01,Project Executive,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 02,Sr. Project Manager,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 03,Project Manager,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 04,Assistant Project Manager,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 05,Area Manager,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 06,Sr. Superintendent,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 07,Superintendent,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 08,Assistant Superintendent,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 09,Sr. Project Engineer,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 72 10,Project Engineer II,FALSE,090b593c-234982-1fda34-12rfds32rf
+00 73 19,Health and Safety Requirements,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 00,General Requirements,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 01,Postage / UPS/FedEx,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 02,Delivery Service/ Courier,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 03,Temp Fencing,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 04,Shed/Storage Facility,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 05,Chemical Toilets,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 06,Electrical Consumption/Temp Power,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 07,Electrical Final,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 08,Water Consumption/Temp Water,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 09,Gas Consumption,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 00 10,Sewer Charges,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 66 00,Product Storage and Handling Requirements,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 74 13,Rough And Daily Cleaning,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 74 19,Dumpster And Dump Fees,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 74 23,Final Cleaning,FALSE,090b593c-234982-1fda34-12rfds32rf
+01 78 33,Bonds,FALSE,090b593c-234982-1fda34-12rfds32rf
+02 00 00,Existing Conditions,FALSE,090b593c-234982-1fda34-12rfds32rf
+02 21 00,Surveys,FALSE,090b593c-234982-1fda34-12rfds32rf
+02 41 00,Interior Demolition,FALSE,090b593c-234982-1fda34-12rfds32rf
+02 50 00,Site Remediation,FALSE,090b593c-234982-1fda34-12rfds32rf
+02 55 00,Remediation Soil Stabilization,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 00 00,Concrete,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 30 00,Cast-in-Place Concrete,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 30 30,Slab on Grade ,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 30 31,Post Tension Slab on Grade,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 30 32,Equipment Pad,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 30 51,Walls,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 30 52,Retaining Walls,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 30 70,Columns,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 30 71,Stairs,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 30 72,Post Tension Decks,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 30 73,Elevated Beams,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 31 00,Foundations,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 31 10,Continuous footings,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 31 20,Retaining Footings,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 31 30,Spread Footings,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 31 40,Mat Footings,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 31 50,Pile Caps,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 31 60,Elevator Pit Walls,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 31 70,Stem Walls,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 31 80,Grade Beams,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 40 00,Precast Concrete,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 41 00,Precast Structural Concrete,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 41 16,Precast Concrete Slab,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 41 33,Precast Tees,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 45 00,Precast Architectural Concrete,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 48 19,Precast Stair Treads,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 54 00,Cast Underlayment (Gypcrete),FALSE,090b593c-234982-1fda34-12rfds32rf
+03 54 13,Poured Gypsum Underlayment,FALSE,090b593c-234982-1fda34-12rfds32rf
+03 54 14,Concrete Topping ,FALSE,090b593c-234982-1fda34-12rfds32rf
+04 00 00,Masonry,FALSE,090b593c-234982-1fda34-12rfds32rf
+04 20 00,Unit Masonry,FALSE,090b593c-234982-1fda34-12rfds32rf
+04 21 13,Brick and Mortar,FALSE,090b593c-234982-1fda34-12rfds32rf
+04 22 00,Concrete Unit Masonry,FALSE,090b593c-234982-1fda34-12rfds32rf
+04 40 00,Stone Assemblies,FALSE,090b593c-234982-1fda34-12rfds32rf
+04 42 00,Exterior Cladding - Veneer,FALSE,090b593c-234982-1fda34-12rfds32rf
+04 43 00,Stone Masonry,FALSE,090b593c-234982-1fda34-12rfds32rf
+04 57 00,Masonry Fireplaces,FALSE,090b593c-234982-1fda34-12rfds32rf
