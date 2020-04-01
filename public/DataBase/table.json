@@ -1,0 +1,308 @@
+{
+  "tabledata": [
+    {
+      "name": "General Conditions",
+      "cost_code": "00 00 00"
+    },
+    {
+      "name": "Non-Reimbursable",
+      "cost_code": "00 00 01"
+    },
+    {
+      "name": "Permits",
+      "cost_code": "00 31 46"
+    },
+    {
+      "name": "Project Forms",
+      "cost_code": "00 60 00"
+    },
+    {
+      "name": "Sales Tax",
+      "cost_code": "00 62 76"
+    },
+    {
+      "name": "Warranty",
+      "cost_code": "00 65 36"
+    },
+    {
+      "name": "General Conditions",
+      "cost_code": "00 72 00"
+    },
+    {
+      "name": "Project Executive",
+      "cost_code": "00 72 01"
+    },
+    {
+      "name": "Sr. Project Manager",
+      "cost_code": "00 72 02"
+    },
+    {
+      "name": "Project Manager",
+      "cost_code": "00 72 03"
+    },
+    {
+      "name": "Assistant Project Manager",
+      "cost_code": "00 72 04"
+    },
+    {
+      "name": "Area Manager",
+      "cost_code": "00 72 05"
+    },
+    {
+      "name": "Sr. Superintendent",
+      "cost_code": "00 72 06"
+    },
+    {
+      "name": "Superintendent",
+      "cost_code": "00 72 07"
+    },
+    {
+      "name": "Assistant Superintendent",
+      "cost_code": "00 72 08"
+    },
+    {
+      "name": "Sr. Project Engineer",
+      "cost_code": "00 72 09"
+    },
+    {
+      "name": "Project Engineer II",
+      "cost_code": "00 72 10"
+    },
+    {
+      "name": "Health and Safety Requirements",
+      "cost_code": "00 73 19"
+    },
+    {
+      "name": "General Requirements",
+      "cost_code": "01 00 00"
+    },
+    {
+      "name": "Postage / UPS/FedEx",
+      "cost_code": "01 00 01"
+    },
+    {
+      "name": "Delivery Service/ Courier",
+      "cost_code": "01 00 02"
+    },
+    {
+      "name": "Temp Fencing",
+      "cost_code": "01 00 03"
+    },
+    {
+      "name": "Shed/Storage Facility",
+      "cost_code": "01 00 04"
+    },
+    {
+      "name": "Chemical Toilets",
+      "cost_code": "01 00 05"
+    },
+    {
+      "name": "Electrical Consumption/Temp Power",
+      "cost_code": "01 00 06"
+    },
+    {
+      "name": "Electrical Final",
+      "cost_code": "01 00 07"
+    },
+    {
+      "name": "Water Consumption/Temp Water",
+      "cost_code": "01 00 08"
+    },
+    {
+      "name": "Gas Consumption",
+      "cost_code": "01 00 09"
+    },
+    {
+      "name": "Sewer Charges",
+      "cost_code": "01 00 10"
+    },
+    {
+      "name": "Product Storage and Handling Requirements",
+      "cost_code": "01 66 00"
+    },
+    {
+      "name": "Rough And Daily Cleaning",
+      "cost_code": "01 74 13"
+    },
+    {
+      "name": "Dumpster And Dump Fees",
+      "cost_code": "01 74 19"
+    },
+    {
+      "name": "Final Cleaning",
+      "cost_code": "01 74 23"
+    },
+    {
+      "name": "Bonds",
+      "cost_code": "01 78 33"
+    },
+    {
+      "name": "Existing Conditions",
+      "cost_code": "02 00 00"
+    },
+    {
+      "name": "Surveys",
+      "cost_code": "02 21 00"
+    },
+    {
+      "name": "Interior Demolition",
+      "cost_code": "02 41 00"
+    },
+    {
+      "name": "Site Remediation",
+      "cost_code": "02 50 00"
+    },
+    {
+      "name": "Remediation Soil Stabilization",
+      "cost_code": "02 55 00"
+    },
+    {
+      "name": "Concrete",
+      "cost_code": "03 00 00"
+    },
+    {
+      "name": "Cast-in-Place Concrete",
+      "cost_code": "03 30 00"
+    },
+    {
+      "name": "Slab on Grade",
+      "cost_code": "03 30 30"
+    },
+    {
+      "name": "Post Tension Slab on Grade",
+      "cost_code": "03 30 31"
+    },
+    {
+      "name": "Equipment Pad",
+      "cost_code": "03 30 32"
+    },
+    {
+      "name": "Walls",
+      "cost_code": "03 30 51"
+    },
+    {
+      "name": "Retaining Walls",
+      "cost_code": "03 30 52"
+    },
+    {
+      "name": "Columns",
+      "cost_code": "03 30 70"
+    },
+    {
+      "name": "Stairs",
+      "cost_code": "03 30 71"
+    },
+    {
+      "name": "Post Tension Decks",
+      "cost_code": "03 30 72"
+    },
+    {
+      "name": "Elevated Beams",
+      "cost_code": "03 30 73"
+    },
+    {
+      "name": "Foundations",
+      "cost_code": "03 31 00"
+    },
+    {
+      "name": "Continuous footings",
+      "cost_code": "03 31 10"
+    },
+    {
+      "name": "Retaining Footings",
+      "cost_code": "03 31 20"
+    },
+    {
+      "name": "Spread Footings",
+      "cost_code": "03 31 30"
+    },
+    {
+      "name": "Mat Footings",
+      "cost_code": "03 31 40"
+    },
+    {
+      "name": "Pile Caps",
+      "cost_code": "03 31 50"
+    },
+    {
+      "name": "Elevator Pit Walls",
+      "cost_code": "03 31 60"
+    },
+    {
+      "name": "Stem Walls",
+      "cost_code": "03 31 70"
+    },
+    {
+      "name": "Grade Beams",
+      "cost_code": "03 31 80"
+    },
+    {
+      "name": "Precast Concrete",
+      "cost_code": "03 40 00"
+    },
+    {
+      "name": "Precast Structural Concrete",
+      "cost_code": "03 41 00"
+    },
+    {
+      "name": "Precast Concrete Slab",
+      "cost_code": "03 41 16"
+    },
+    {
+      "name": "Precast Tees",
+      "cost_code": "03 41 33"
+    },
+    {
+      "name": "Precast Architectural Concrete",
+      "cost_code": "03 45 00"
+    },
+    {
+      "name": "Precast Stair Treads",
+      "cost_code": "03 48 19"
+    },
+    {
+      "name": "Cast Underlayment (Gypcrete)",
+      "cost_code": "03 54 00"
+    },
+    {
+      "name": "Poured Gypsum Underlayment",
+      "cost_code": "03 54 13"
+    },
+    {
+      "name": "Concrete Topping",
+      "cost_code": "03 54 14"
+    },
+    {
+      "name": "Masonry",
+      "cost_code": "04 00 00"
+    },
+    {
+      "name": "Unit Masonry",
+      "cost_code": "04 20 00"
+    },
+    {
+      "name": "Brick and Mortar",
+      "cost_code": "04 21 13"
+    },
+    {
+      "name": "Concrete Unit Masonry",
+      "cost_code": "04 22 00"
+    },
+    {
+      "name": "Stone Assemblies",
+      "cost_code": "04 40 00"
+    },
+    {
+      "name": "Exterior Cladding - Veneer",
+      "cost_code": "04 42 00"
+    },
+    {
+      "name": "Stone Masonry",
+      "cost_code": "04 43 00"
+    },
+    {
+      "name": "Masonry Fireplaces",
+      "cost_code": "04 57 00"
+    }
+  ]
+}

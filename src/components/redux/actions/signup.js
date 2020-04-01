@@ -1,5 +1,4 @@
 import * as actionTypes from "./actionTypes";
-import axios from "axios";
 export const signup = authData => {
   console.log("authData", authData);
   return dispatch => {
@@ -24,7 +23,7 @@ export const signup = authData => {
       userArr.push(signupData);
       localStorage.setItem("token", JSON.stringify(userArr));
       authData.history.push("/");
-      axios.post(url, { signupData });
+      // axios.post(url, { signupData });
       dispatch(success(userArr));
     }
   };
