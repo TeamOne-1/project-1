@@ -1,0 +1,11 @@
+// Signup
+export const IS_SIGNUP_START = "IS_SIGNUP_START";
+export const IS_SIGNUP_SUCCESS = "IS_SIGNUP_SUCCESS";
+export const IS_SIGNUP_FAIL = "IS_SIGNUP_FAIL";
+export const IS_SET_REDIRECT_PATH = "IS_SET_REDIRECT_PATH";
+
+// Login
+export const IS_SIGNIN_START = "IS_SIGNIN_START";
+export const IS_SIGNIN_SUCCESS = "IS_SIGNIN_SUCCESS";
+export const IS_SIGNIN_FAIL = "IS_SIGNIN_FAIL";
+export const IS_SIGN_OUT = "IS_SIGN_OUT";
