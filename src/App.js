@@ -3,8 +3,9 @@ import "./App.css";
 import NavBar from "./components/navbar/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Resource from "./components/resource/Resource";
-import Project from "./components/Project";
-import Formula from "./components/Formula";
+import Project from "./components/project/Project";
+import MyFormula from "./components/MyFormula";
+import Tamplate from "./components/Formula";
 import Login from "./components/forms/Login";
 import { Provider } from "react-redux";
 import store from "./components/redux/store";
@@ -38,7 +39,12 @@ function App() {
             <Route
               exact
               path="/formula"
-              render={props => <Formula {...props} />}
+              render={props => <MyFormula {...props} />}
+            />
+            <Route
+              exact
+              path="/template"
+              render={props => <Tamplate {...props} />}
             />
           </Switch>
           <Route exact render={props => <HOC {...props} />} />

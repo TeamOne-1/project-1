@@ -1,5 +1,5 @@
 import React from "react";
-import ResHoc from "./IsAuthHoc";
+import ResHoc from "../IsAuthHoc";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,11 +11,12 @@ import TableRow from "@material-ui/core/TableRow";
 import { Dropdown, Button } from "react-bootstrap";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import ReplyIcon from "@material-ui/icons/Reply";
-import "./resource/resources.css";
-import { csv } from "d3";
-import data from "./resource/data.csv";
+
+import "../resource/resources.css";
+
 import Checkbox from "@material-ui/core/Checkbox";
 import RightTable from "./RightTable";
+import axios from "axios";
 function createData(checkbox, cost_code, name) {
   return { checkbox, cost_code, name };
 }
@@ -39,6 +40,7 @@ class ResourceTable extends React.Component {
       checked: true,
       newrow: [],
       trueRows: []
+      // options: "project1"
     };
     this.filterTrueRows = this.filterTrueRows.bind(this);
     this.onChecked = this.onChecked.bind(this);
@@ -89,13 +91,46 @@ class ResourceTable extends React.Component {
 
   componentDidMount = () => {
     this.props.handleAuth();
-    csv(data).then(data => {
-      let rows = this.state.rows;
-      data.map(data => {
-        return rows.push(createData(false, data.cost_code, data.name));
+    this.tableOne();
+  };
+
+  tableOne = async val => {
+    let renderData = val === undefined ? (val = "project1") : val;
+    if (renderData === "project1") {
+      console.log(this.state.options, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      const res = await axios.get("http://localhost:3000/DataBase/table.json");
+      let mydata = res.data.tabledata;
+      mydata.map(data => {
+        return this.state.rows.push(
+          createData(false, data.cost_code, data.name)
+        );
       });
-      this.setState({ rows });
-    });
+      this.setState({ rows: [...this.state.rows, mydata] });
+    } else if (renderData === "project2") {
+      console.log(this.state.options, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      const res = await axios.get("http://localhost:3000/DataBase/table2.json");
+      let mydata = res.data.tabledata2;
+      mydata.map(data => {
+        return this.state.rows.push(
+          createData(false, data.cost_code, data.name)
+        );
+      });
+
+      this.setState({ rows: [...this.state.rows, mydata] });
+    } else if (renderData === "project3") {
+      console.log(this.state.options, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      const res = await axios.get("http://localhost:3000/DataBase/table3.json");
+      let mydata = res.data.tabledata3;
+      mydata.map(data => {
+        return this.state.rows.push(
+          createData(false, data.cost_code, data.name)
+        );
+      });
+
+      this.setState({ rows: [...this.state.rows, mydata] });
+    }
+
+    // console.log(rows, ">???>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
   };
   handleChangePage = (event, newPage) => {
     this.setState({
@@ -117,7 +152,11 @@ class ResourceTable extends React.Component {
   handleChange = e => {
     this.setState({ searchString: e.target.value });
   };
-
+  handleChangeValue = e => {
+    e.preventDefault();
+    this.setState({ options: e.target.value, rows: [] });
+    this.tableOne(e.target.value);
+  };
   render() {
     let filterList = this.state.rows,
       trueFilterList = this.state.trueRows,
@@ -127,20 +166,36 @@ class ResourceTable extends React.Component {
         return filter.name.toLowerCase().match(searchString);
       });
     }
+    const options = [
+      { value: "project1", name: "Project 1" },
+      { value: "project2", name: "Project 2" },
+      { value: "project3", name: "Project 3" },
+      { value: "project4", name: "Project 4" }
+    ];
     return (
       // seperate
       <React.Fragment>
-        <div align="right" style={{ marginTop: "20px", marginRight: "80px" }}>
-          <Dropdown className="project">
-            <Dropdown.Toggle className="dropdown">Project 1 </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={this.project2}>Project 2</Dropdown.Item>
-              <Dropdown.Item onClick={this.project3}>Project 3</Dropdown.Item>
-              <Dropdown.Item onClick={this.project4}>Project 4</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+        <div align="right" style={{ marginTop: "5px", marginRight: "80px" }}>
+          <form>
+            <select
+              value={this.state.options}
+              onChange={this.handleChangeValue}
+              style={{
+                width: "300px",
+                height: "50px",
+                outline: "none",
+                marginRight: "10px"
+              }}
+            >
+              {options.map(val => (
+                <option key={val.value} value={val.value}>
+                  {val.name}
+                </option>
+              ))}
+            </select>
+          </form>{" "}
         </div>
-        <Paper style={{ margin: "50px auto", width: "90%" }}>
+        <Paper style={{ margin: "10px auto", width: "90%" }}>
           <div
             style={{
               display: "flex",
@@ -278,6 +333,9 @@ class ResourceTable extends React.Component {
               handleChangePage={this.handleChangePage}
               handleChangeRowsPerPage={this.handleChangeRowsPerPage}
               count={this.state.rows.length}
+              onChecked={this.onChecked}
+              trueRows={this.state.trueRows}
+              rows={this.state.rows}
             />
           </div>
         </Paper>
@@ -295,18 +353,6 @@ class ResourceTable extends React.Component {
           >
             Edit format
           </a>
-          <Button
-            style={{
-              width: "80px",
-              backgroundColor: "hsl(14, 90%, 61%)",
-              border: "1px solid hsl(14, 90%, 61%)",
-              float: "right"
-            }}
-            className="btn btn-block text-white btn-color"
-            type="submit"
-          >
-            Submit
-          </Button>
         </div>
       </React.Fragment>
     );

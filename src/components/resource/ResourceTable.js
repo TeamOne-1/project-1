@@ -30,15 +30,7 @@ class Table extends Component {
       columnsData: [
         {
           title: "Name",
-          field: "name",
-          editComponent: props => (
-            <input
-              type="text"
-              value={props.value}
-              required
-              onChange={e => props.onChange(e.target.value)}
-            />
-          )
+          field: "name"
         },
         { title: "Cost Code", field: "cost_code" }
       ]
@@ -84,7 +76,8 @@ class Table extends Component {
         return tableData.push(createData(data.cost_code, data.name));
         // console.log("tableData", tableData);
       });
-      this.setState({ tableData });
+      console.log("tableData --> returns array of objects", tableData);
+      this.setState({ importData: tableData });
     });
   };
 
@@ -128,7 +121,37 @@ class Table extends Component {
 
   importCsv = (data, fileInfo) => {
     console.log("importCsv", data, fileInfo);
-    this.setState({ importData: data });
+    console.log("IMPORT DATA --> ", data);
+
+    // Making columns data
+    const columnsArrayUnModified = { ...data[0] };
+    console.log("Columns Object --> ", columnsArrayUnModified); // {0: "Grade", 1: "   "Ounce"", 2: " "Gram"", 3: " "Inch"", 4: "  "mm"", 5: " "PPO""}
+    let counter = 0;
+    const columnsArrayModified = []; // Column object {title: [extractedTitle], field: 0, 1, 2, ...}
+    for (const item in columnsArrayUnModified) {
+      columnsArrayModified.push({
+        title: columnsArrayUnModified[item],
+        field: "" + counter
+      });
+      counter++;
+    }
+
+    console.log("Modified Array for column -->", columnsArrayModified);
+
+    // Making columns data
+    data.splice(0, 1);
+    const dataArrayModified = [];
+    data.map(item => {
+      dataArrayModified.push({ ...item }); //data object {0: "12", 1: "       0.0005", 2: "    0.014", 3: "    0.050", 4: " 1.30", 5: " 2025"}
+    });
+    console.log("Array of data modified -->", dataArrayModified);
+
+    this.setState({
+      importData: dataArrayModified,
+      columnsData: columnsArrayModified
+    });
+    // importData
+    // columnsData
   };
 
   handleInputForColumn = event => {
@@ -147,7 +170,7 @@ class Table extends Component {
               return col;
             })
           }
-          data={this.state.tableData}
+          data={this.state.importData}
           onRowClick={(evt, selectedRow) => this.setState({ selectedRow })}
           options={{
             rowStyle: rowData => ({
@@ -339,14 +362,14 @@ class Table extends Component {
                       >
                         Close
                       </Button>
-                      <Button
+                      {/* <Button
                         variant="primary"
                         type="submit"
                         onClick={this.handleFileModalClose}
                         className="add-btn"
                       >
                         Import
-                      </Button>
+                      </Button> */}
                     </Modal.Footer>
                   </form>
                 </Modal>

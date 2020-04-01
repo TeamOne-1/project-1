@@ -9,7 +9,7 @@ const SignUp = props => {
   const [show, setShow] = useState(true);
 
   const onShow = () => {
-    setShow(!setShow);
+    setShow(!show);
   };
   const onSubmit = e => {
     e.preventDefault();

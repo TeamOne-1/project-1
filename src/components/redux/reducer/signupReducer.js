@@ -37,16 +37,6 @@ const fail = (state, action) => {
   };
 };
 
-// const logout = (state, action) => {
-//   return {
-//     ...state,
-//     loading: false,
-//     success: false,
-//     authorized: false,
-//     token: null
-//   };
-// };
-
 const SignupReducer = (state = initial, action) => {
   switch (action.type) {
     case actionTypes.IS_SIGNUP_START:
